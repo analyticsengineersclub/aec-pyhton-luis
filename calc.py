@@ -13,6 +13,13 @@ add.add_argument("ints_to_sum", nargs=4, type=int)
 sub = subparsers.add_parser("sub", help='substaract integers. Use 4 digits')
 sub.add_argument("ints_to_sub", nargs=4, type=int)
 
+def subtract_func(ints_to_sub):
+    our_sub = ints_to_sub[0] - ints_to_sub[1] - ints_to_sub[2] - ints_to_sub[3]
+    if our_sub < 0:
+        our_sub = 0
+    print(f"The subtracted of values is  {our_sub}")
+    return our_sub
+
 # Multiplication
 multiply = subparsers.add_parser("multiply", help='multiply integers. Use 4 digits')
 multiply.add_argument("ints_to_multiply", nargs=4, type=int)
@@ -21,20 +28,28 @@ multiply.add_argument("ints_to_multiply", nargs=4, type=int)
 divide = subparsers.add_parser("divide", help='divide integers. Use 4 digits')
 divide.add_argument("ints_to_divide", nargs=2, type=int)
 
-args = parser.parse_args()
+def divide_func(ints_to_divide):
+    our_division = (ints_to_divide[0] / ints_to_divide[1]) if ints_to_divide[1] != 0 else 0 
+    print(f"The division of values is  {our_division}")
+    return our_division
 
-if args.command == "add":
-    our_sum = sum(args.ints_to_sum)
-    print(f"the sum of values is: {our_sum}")
+if __name__ == '__main__':
+    args = parser.parse_args()
 
-if args.command == 'sub':
-	our_sub = args.ints_to_sub[0] - args.ints_to_sub[1] - args.ints_to_sub[2] - args.ints_to_sub[3]
-	print(f"The subtracted of values is  {our_sub}")
+    if __name__ == "__main__":
+        args = parser.parse_args()
 
-if args.command == 'multiply':
-	our_multiply = args.ints_to_multiply[0] * args.ints_to_multiply[1] * args.ints_to_multiply[2] * args.ints_to_multiply[3]
-	print(f"The product of values is  {our_multiply}")
+    if args.command == "add":
+        our_sum = sum(args.ints_to_sum)
+        print(f"the sum of values is: {our_sum}")
 
-if args.command == 'divide':
-	our_division = (args.ints_to_divide[0] / args.ints_to_divide[1]) if args.ints_to_divide[1] != 0 else 'Check denominator for non-zero value'
-	print(f"The division of values is: {our_division}")
+    if args.command == 'sub':
+        subtract_func(args.ints_to_sub)
+
+    if args.command == 'multiply':
+        our_multiply = args.ints_to_multiply[0] * args.ints_to_multiply[1] * args.ints_to_multiply[2] * args.ints_to_multiply[3]
+        print(f"The product of values is  {our_multiply}")
+
+    if args.command == 'divide':
+        divide_func(args.ints_to_divide)
+        
