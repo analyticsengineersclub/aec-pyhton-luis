@@ -14,5 +14,9 @@ class TestSubtract(unittest.TestCase):
 		sub_result = subtract_func(arg_ints)
 		self.assertEqual(sub_result, 0)
 
+	def test_n_args(self):
+		with self.assertRaises(Exception):
+			subtract_func([1, 2, 3, 4, 5])
+
 if __name__ == '__main__':
 	unittest.main()
